@@ -7,7 +7,7 @@ import { QUERY_USER } from "../utils/queries.js";
 import { DELETE_PROJECT } from "../utils/mutations.js";
 //----- Icons -----//
 import backpack from "../assets/images/backpack.png";
-import deleteProjectIcon from '../assets/images/delete-project.svg'
+import deleteProjectIcon from "../assets/images/delete-project.svg";
 //----- CSS -----//
 import "../assets/css/ProjectDashboard.css";
 //-------------------- EXPORT --------------------//
@@ -17,11 +17,15 @@ const ProjectDashboard = () => {
   const { data } = useQuery(QUERY_USER);
 
   const user = data?.user || {};
-  const [deleteProject, { error: deleteError }] = useMutation(DELETE_PROJECT);
+  const [deleteProject] = useMutation(DELETE_PROJECT, {
+    onError: (error) => {
+      console.error("Error deleting project:", error);
+    },
+  });
   console.log(user);
 
   const handleDeleteProject = async (projectId) => {
-    event.preventDefault(); // prevent the anchor link from navigating
+    // event.preventDefault(); // prevent the anchor link from navigating
     try {
       // Call the deleteProject mutation with the project ID
       await deleteProject({
@@ -68,7 +72,7 @@ const ProjectDashboard = () => {
                   className="delete-button"
                   onClick={() => handleDeleteProject(project._id)}
                 >
-                  <img src={deleteProjectIcon} alt="project trash can"/>
+                  <img src={deleteProjectIcon} alt="project trash can" />
                 </button>
                 <a href={`/projects/${project._id}/info`} key={project._id}>
                   <div className="project-icon">
