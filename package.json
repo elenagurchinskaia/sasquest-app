@@ -21,6 +21,7 @@
     "@cloudinary/url-gen": "^1.11.2",
     "apollo-server": "^3.12.1",
     "cloudinary": "^1.40.0",
+    "dotenv": "^16.3.1",
     "env-cmd": "^10.1.0",
     "normalize.css": "^8.0.1",
     "react-animated-cursor": "^2.8.1"
